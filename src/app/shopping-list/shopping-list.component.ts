@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
+import { Ingredient } from '../shared/ingredient.model';
 
 @Component({
   selector: 'app-shopping-list',
@@ -10,6 +11,9 @@ import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
   styleUrl: './shopping-list.component.css'
 })
 export class ShoppingListComponent {
-  ingredients = [];
+  ingredients: Ingredient[] = [
+    new Ingredient('Apple', 5),
+    new Ingredient('Tomatoes', 5)
+  ];
 
 }
