@@ -6,7 +6,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 @Component({
   selector: 'app-recipes',
   standalone: true,
-  imports: [CommonModule, RecipeListComponent, RecipeDetailComponent],
+  imports: [CommonModule, RecipeListComponent, RecipeDetailComponent,],
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.css'
 })
