@@ -15,9 +15,11 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     CommonModule,
-    FormsModule,
     BrowserModule,
+    FormsModule,
     HttpClientModule
-  ]
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
