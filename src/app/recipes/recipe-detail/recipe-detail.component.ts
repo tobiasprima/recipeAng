@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -9,5 +10,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './recipe-detail.component.css'
 })
 export class RecipeDetailComponent {
+  @Input() recipe!: Recipe;
 
 }
