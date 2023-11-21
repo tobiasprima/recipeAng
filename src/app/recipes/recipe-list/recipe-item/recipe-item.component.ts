@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Recipe } from '../../recipe.model';
 
@@ -11,6 +11,11 @@ import { Recipe } from '../../recipe.model';
 })
 export class RecipeItemComponent {
   @Input() recipe!: Recipe;
+  @Output() recipeClicked = new EventEmitter<void>()
+
+  onClicked(){
+    this.recipeClicked.emit();
+  }
 
     constructor(){}
 }
