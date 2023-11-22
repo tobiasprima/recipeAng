@@ -26,12 +26,14 @@ export class RecipeService {
             new Ingredient('Meat', 5),
           ]),
       ];
+
+
+      constructor(private shoppingListService: ShoppingListService){}
     
       getRecipe(){
         return this.recipes.slice();
       }
 
-      constructor(private shoppingListService: ShoppingListService){}
 
       addToShoppingList(ingredient: Ingredient[]){
         this.shoppingListService.addIngredients(ingredient);
