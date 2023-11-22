@@ -1,7 +1,8 @@
 import { Directive, Input, HostListener, ElementRef, Renderer2, HostBinding } from "@angular/core";
 
 @Directive({
-    selector: '[appDropdown]',
+  standalone: true,
+  selector: '[appDropdown]',
 })
 
 export class DropdownDirective {
