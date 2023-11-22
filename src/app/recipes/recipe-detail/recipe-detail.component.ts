@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Recipe } from '../recipe.model';
 import { DropdownDirective } from '../../shared/dropdown.directive';
 import { RecipeService } from '../recipe.service';
-import { Ingredient } from '../../shared/ingredient.model';
 
 @Component({
   selector: 'app-recipe-detail',
