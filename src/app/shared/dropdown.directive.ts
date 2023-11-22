@@ -1,22 +1,13 @@
-import { Directive, Input, HostListener, ElementRef, Renderer2 } from "@angular/core";
+import { Directive, Input, HostListener, ElementRef, Renderer2, HostBinding } from "@angular/core";
 
 @Directive({
     selector: '[appDropdown]',
 })
 
 export class DropdownDirective {
-    @Input() ("appDropdown") index!: number;
+  @HostBinding('class.open') isOpen = false;
 
-  constructor(private theElementRef: ElementRef, private theRenderer: Renderer2) { }
-
-  @HostListener("click") toggleDrawer() {
-    let elements = this.theElementRef.nativeElement.querySelectorAll('.show');
-
-    if (elements.length > 0) {
-      this.theRenderer.removeClass(this.theElementRef.nativeElement.children[this.index], "show");
-    } else {
-      this.theRenderer.addClass(this.theElementRef.nativeElement.children[this.index], "show");
-    }
+  @HostListener('click') openMenu(){
+    this.isOpen = !this.isOpen;
   }
-
 }
