@@ -9,7 +9,6 @@
     <div class="col-12 cursor-pointer">
         <app-recipe-item 
         *ngFor="let recipeEl of recipes" 
-        [recipe]="recipeEl"
-        (recipeClicked)="onRecipeClicked(recipeEl)"></app-recipe-item>
+        [recipe]="recipeEl"></app-recipe-item>
     </div>
 </div>
