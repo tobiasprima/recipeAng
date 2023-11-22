@@ -6,4 +6,8 @@ export class RecipeService {
         new Recipe('Another Test Recipe', 'This is a test', 'https://img.taste.com.au/h2qVkJjl/taste/2021/09/air-fryer-chicken-rissoles-recipe-173558-1.jpg'),
       ];
     
+
+      getRecipe(){
+        return this.recipes.slice();
+      }
 }

@@ -1,23 +1,27 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { Recipe } from '../recipe.model'
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
   imports: [CommonModule, RecipeItemComponent],
   templateUrl: './recipe-list.component.html',
-  styleUrl: './recipe-list.component.css'
+  styleUrl: './recipe-list.component.css',
+  providers: [RecipeService],
 })
-export class RecipeListComponent {
+export class RecipeListComponent implements OnInit {
   @Output() recipeWasClicked = new EventEmitter<Recipe>();
   
-  recipes: Recipe[] = [
-    new Recipe('A Test Recipe', 'This is a test', 'https://img.taste.com.au/h2qVkJjl/taste/2021/09/air-fryer-chicken-rissoles-recipe-173558-1.jpg'),
-    new Recipe('Another Test Recipe', 'This is a test', 'https://img.taste.com.au/h2qVkJjl/taste/2021/09/air-fryer-chicken-rissoles-recipe-173558-1.jpg'),
-  ];
+  recipes!: Recipe[] ;
 
+  constructor(private recipeService: RecipeService){}
+
+  ngOnInit() {
+      this.recipes=this.recipeService.getRecipe();
+  }
 
     onRecipeClicked(recipe: Recipe){
       this.recipeWasClicked.emit(recipe);
