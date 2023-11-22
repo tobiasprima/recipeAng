@@ -9,6 +9,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -25,6 +26,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     RecipesComponent,
     ShoppingListComponent,
     DropdownDirective,
+    AppRoutingModule,
   ],
   providers: [ShoppingListService],
   bootstrap: [AppComponent]
