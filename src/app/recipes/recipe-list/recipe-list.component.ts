@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { Recipe } from '../recipe.model'
 import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Router } from '@angular/router';
