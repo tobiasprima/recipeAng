@@ -6,8 +6,6 @@ import { ShoppingListService } from './shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
-  standalone: true,
-  imports: [CommonModule, ShoppingEditComponent],
   templateUrl: './shopping-list.component.html',
   styleUrl: './shopping-list.component.css',
 })

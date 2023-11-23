@@ -1,12 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './shopping-edit.component.html',
   styleUrl: './shopping-edit.component.css'
 })
