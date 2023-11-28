@@ -8,6 +8,6 @@ export class DataStorageService {
 
     storeRecipes(){
         const recipes = this.recipeService.getRecipe();
-        return this.httpClient.put("https://ng-course-recipe-book-8989c-default-rtdb.firebaseio.com.json", recipes)
+        return this.httpClient.put("https://ng-course-recipe-book-8989c-default-rtdb.firebaseio.com", recipes)
     }
 }
