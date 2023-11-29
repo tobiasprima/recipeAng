@@ -11,27 +11,26 @@ export class AuthComponent implements OnInit{
 
 
     constructor(){}
-    signUpForm!: FormGroup;
+    authForm!: FormGroup;
 
     onSwitchMode(){
         this.isLoginMode = !this.isLoginMode
     }
 
 
-    ngOnInit(): void {
-       
-    }
-
-    onSignUp(){
+    onSubmit(){
         
     }
     
-    private initForm(){
-
-
-        this.signUpForm = new FormGroup({   
+    ngOnInit() {
+        this.authForm = new FormGroup({   
             'email' : new FormControl(null, [Validators.required, Validators.email]),
             'password' : new FormControl(null, [Validators.required, Validators.minLength(6)])
         })
+    }
+    private initForm(){
+
+
+      
     }
 }
