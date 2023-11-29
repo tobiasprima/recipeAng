@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthResponseData, AuthService } from "./auth.service";
 import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-auth',
@@ -18,7 +19,7 @@ export class AuthComponent implements OnInit{
         this.isLoginMode = !this.isLoginMode
     }
 
-    constructor(private authService: AuthService){}
+    constructor(private authService: AuthService, private router: Router){}
 
     onSubmit(){
 
@@ -40,7 +41,10 @@ export class AuthComponent implements OnInit{
             authObs.subscribe({
                 next: 
                 resData => 
-                {console.log('resData',resData), this.isLoading = false},
+                {console.log('resData',resData);
+                 this.isLoading = false;
+                 this.router.navigate(['./recipes'])
+                },
                 error: errorMessage => 
                 {console.log('error',errorMessage); 
                 this.error = errorMessage;
