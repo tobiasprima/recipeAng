@@ -29,7 +29,4 @@ export class AuthComponent implements OnInit{
       
         
     }
-    private initForm(){
-
-    }
 }
