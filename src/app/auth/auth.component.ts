@@ -11,6 +11,7 @@ export class AuthComponent implements OnInit{
     isLoginMode = true;
     authForm!: FormGroup;
     isLoading = false;
+    error: string = '';
 
     onSwitchMode(){
         this.isLoginMode = !this.isLoginMode
@@ -33,8 +34,12 @@ export class AuthComponent implements OnInit{
                 this.authService.signUp(email, password)
                 .subscribe({
                     next: 
-                    resData => {console.log('resData',resData), this.isLoading = false},
-                    error: err => {console.log('error',err), this.isLoading = false}
+                    resData => 
+                    {console.log('resData',resData), this.isLoading = false},
+                    error: errorMessage => 
+                    {console.log('error',errorMessage); 
+                    this.error = errorMessage;
+                    this.isLoading = false}
                 });
             }
            
