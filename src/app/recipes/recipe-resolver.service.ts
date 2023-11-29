@@ -15,5 +15,5 @@ export class RecipeResolverService   {
         } else {
             return recipes;
         }
-      };
+      };    
     }
