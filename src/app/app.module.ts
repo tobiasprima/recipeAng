@@ -42,7 +42,7 @@ import { RecipeService } from './recipes/recipe.service';
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [ShoppingListService, RecipeService],
+  providers: [ShoppingListService, RecipeService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
