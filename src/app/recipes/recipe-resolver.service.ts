@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { ResolveFn } from "@angular/router";
 import { DataStorageService } from "../shared/data-storage.service";
 import { Recipe } from "./recipe.model";
-import { delay } from "rxjs";
 import { RecipeService } from "./recipe.service";
 
 @Injectable({providedIn: "root"})
