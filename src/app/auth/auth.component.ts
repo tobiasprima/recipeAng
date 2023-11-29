@@ -24,11 +24,18 @@ export class AuthComponent implements OnInit{
         }
             const email = this.authForm.value['email'];
             const password = this.authForm.value['password'];
-            this.authService.signUp(email, password)
-            .subscribe({
-                next: resData => console.log('resData',resData),
-                error: err => console.log('error',err)
-            })
+
+            if(this.isLoginMode){
+
+            } else {
+                this.authService.signUp(email, password)
+                .subscribe({
+                    next: resData => console.log('resData',resData),
+                    error: err => console.log('error',err)
+                });
+            }
+           
+            this.authForm.reset();
         
     }
     
