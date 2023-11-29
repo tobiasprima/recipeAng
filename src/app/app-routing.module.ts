@@ -21,7 +21,12 @@ const appRoute: Routes = [
             }
     
         },
-        { path: ':id/edit', component: RecipeEditComponent,  resolve:{routeResolver:  RecipeResolverService}},
+        { path: ':id/edit', 
+        component: RecipeEditComponent,  
+        resolve:{
+            routeResolver:  RecipeResolverService
+        }
+    },
     ]},
     { path: 'shopping-list', component: ShoppingListComponent}
 ]
