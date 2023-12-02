@@ -13,7 +13,7 @@ export class AuthComponent implements OnInit{
     isLoginMode = true;
     authForm!: FormGroup;
     isLoading = false;
-    error: string = '';
+    error: string | null = '';
 
     onSwitchMode(){
         this.isLoginMode = !this.isLoginMode
@@ -61,7 +61,9 @@ export class AuthComponent implements OnInit{
             'email' : new FormControl(null, [Validators.required, Validators.email]),
             'password' : new FormControl(null, [Validators.required, Validators.minLength(6)])
         })
-      
-        
+    }
+    
+    onCloseBox(){
+        this.error = null;
     }
 }
