@@ -6,6 +6,7 @@
         <div *ngIf="isLoading" style="text-align: center;">
             <app-loading-spinner></app-loading-spinner>
         </div>
+        <app-alert [message]="error" *ngIf="error"></app-alert>
         <form [formGroup]="authForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
             <div class="form-group">
                 <label for="email">E-Mail</label>
