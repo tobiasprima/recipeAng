@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +10,7 @@ import { RecipesModule } from './recipes/recipes.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -18,10 +18,8 @@ import { CoreModule } from './core.module';
   declarations: [
     AppComponent,
     HeaderComponent,
-    AuthComponent,
   ],
   imports: [
-    CommonModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -31,6 +29,7 @@ import { CoreModule } from './core.module';
     ShoppingListModule,
     SharedModule,
     CoreModule,
+    AuthModule,
   ],
   
   bootstrap: [AppComponent]
