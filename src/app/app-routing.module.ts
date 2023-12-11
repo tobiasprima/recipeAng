@@ -5,7 +5,6 @@ import { AuthComponent } from "./auth/auth.component";
 
 const appRoute: Routes = [
     { path: '', redirectTo: '/recipes', pathMatch: 'full'}, 
-{ path: 'shopping-list', component: ShoppingListComponent},
 { path: 'auth', component: AuthComponent},
 
 ]
