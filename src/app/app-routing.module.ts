@@ -10,8 +10,7 @@ import { AuthComponent } from "./auth/auth.component";
 import { authGuardGuard } from "./auth/auth.guard";
 
 const appRoute: Routes = [
-    { path: '', redirectTo: '/auth', pathMatch: 'full'},
-    { path: 'auth', component: AuthComponent},
+    { path: '', redirectTo: '/recipes', pathMatch: 'full'},
     { path: 'recipes', component: RecipesComponent, canActivate: [authGuardGuard] ,children: [
         { path: '', component: RecipeStartComponent},
         { path: 'new', component: RecipeEditComponent},
@@ -22,7 +21,7 @@ const appRoute: Routes = [
             {
                 routeResolver: RecipeResolverService
             }
-    
+            
         },
         { path: ':id/edit', 
         component: RecipeEditComponent,  
@@ -30,8 +29,9 @@ const appRoute: Routes = [
             routeResolver:  RecipeResolverService
         }
     },
-    ]},
-    { path: 'shopping-list', component: ShoppingListComponent},
+]},
+{ path: 'shopping-list', component: ShoppingListComponent},
+{ path: 'auth', component: AuthComponent},
 
 ]
 
