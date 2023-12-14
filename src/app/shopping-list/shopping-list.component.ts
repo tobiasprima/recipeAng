@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
   styleUrl: './shopping-list.component.css',
 })
 export class ShoppingListComponent implements OnInit, OnDestroy{
-  ingredients!: Observable<{ingredients: Ingredient[] | null}>;
+  ingredients!: Observable<{ingredients: Ingredient[]}>;
   private ingChangeSub!: Subscription;
 
   constructor(
