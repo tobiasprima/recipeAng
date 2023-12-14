@@ -4,8 +4,8 @@ import * as ShoppingListActions from "./shopping-list.actions";
 
 export interface State {
     ingredients: Ingredient[];
-    editedIngredient: string | null;
-    editedIngredientIndex: number;
+    editedIngredient: string | null | any;
+    editedIngredientIndex: number | any;
 }
 
 export interface AppState {
@@ -37,7 +37,15 @@ export function isDeleteIngredientsAction(action: Action): action is ShoppingLis
     return action.type === ShoppingListActions.DELETE_INGREDIENTS;
     }
 
-export function shoppingListReducer(state: State = initialState, action: ShoppingListActions.AddIngredient | Action): State {
+export function isStartEdit(action: Action): action is ShoppingListActions.StartEdit {
+    return action.type === ShoppingListActions.START_EDIT;
+    }
+
+export function isStopEdit(action: Action): action is ShoppingListActions.StopEdit{
+    return action.type === ShoppingListActions.STOP_EDIT;
+    }
+
+export function shoppingListReducer(state: State = initialState, action: ShoppingListActions.ShoppingListActions): State {
     switch (action.type) {
         case ShoppingListActions.ADD_INGREDIENT:
             if (isAddIngredientAction(action)) {
@@ -80,6 +88,26 @@ export function shoppingListReducer(state: State = initialState, action: Shoppin
                         return ingredientIndex !== action.payload;
                     })
                 };
+            }
+            return state;
+
+        case ShoppingListActions.START_EDIT:
+            if (isStartEdit(action)) {
+                return{
+                    ...state,
+                    editedIngredientIndex: action.payload as number,
+                    editedIngredient: {...state.ingredients[action.payload as number]}
+                }
+            }
+            return state;
+
+        case ShoppingListActions.STOP_EDIT:
+            if (isStopEdit(action)) {
+                return{
+                    ...state,
+                    editedIngredientIndex: null,
+                    editedIngredient: -1,
+                }
             }
             return state;
 
