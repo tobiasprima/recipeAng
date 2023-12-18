@@ -56,7 +56,7 @@ export class AuthEffects{
                             errorMessage = 'Login Credentials Invalid.';
                             break;
                     }
-                return of(new AuthAction.LoginFail(errorMessage));
+                    return of(new AuthAction.LoginFail(errorMessage));
             })
             )
             }))
