@@ -10,7 +10,7 @@ const initialState: AuthState = {
     user: null
 }
 
-export function authReducer(state: AuthState, action : fromAuthAction.AuthAction){
+export function authReducer(state: AuthState = initialState, action : fromAuthAction.AuthAction){
     switch(action.type) {
         case fromAuthAction.LOGIN:
             const user= new User(action.payload?.email, action.payload?.userId, action.payload?.token, action.payload?.expirationDate )
