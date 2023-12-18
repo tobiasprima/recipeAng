@@ -40,6 +40,7 @@ export function authReducer(state: AuthState = initialState, action : fromAuthAc
                 user: null,
                 authError: action.payload,
                 login: false,
+                loading: false,
             }
         default:
             return state
