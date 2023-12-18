@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthResponseData, AuthService } from "./auth.service";
 import { Observable } from "rxjs";
@@ -12,7 +12,7 @@ import * as AuthAction from "./store/auth.action";
     templateUrl: './auth.component.html'
 })
 
-export class AuthComponent implements OnInit{
+export class AuthComponent implements OnInit, OnDestroy{
     isLoginMode = true;
     authForm!: FormGroup;
     isLoading = false;
@@ -44,32 +44,39 @@ export class AuthComponent implements OnInit{
                 authObs = this.authService.signUp(email, password)
             }
 
-            authObs.subscribe({
-                next: 
-                resData => 
-                {console.log('resData',resData);
-                 this.isLoading = false;
-                 this.router.navigate(['./recipes'])
-                },
-                error: errorMessage => 
-                {console.log('error',errorMessage); 
-                this.error = errorMessage;
-                this.isLoading = false}
-            });
+            // authObs.subscribe({
+            //     next: 
+            //     resData => 
+            //     {console.log('resData',resData);
+            //      this.isLoading = false;
+            //      this.router.navigate(['./recipes'])
+            //     },
+            //     error: errorMessage => 
+            //     {console.log('error',errorMessage); 
+            //     this.error = errorMessage;
+            //     this.isLoading = false}
+            // });
            
             this.authForm.reset();
         
     }
     
     ngOnInit() {
-
         this.authForm = new FormGroup({   
             'email' : new FormControl(null, [Validators.required, Validators.email]),
             'password' : new FormControl(null, [Validators.required, Validators.minLength(6)])
+        })
+        this.store.select('auth').subscribe(authState=> {
+            this.isLoading = authState.loading;
+            this.error = authState.authError;
         })
     }
     
     onCloseBox(){
         this.error = null;
+    }
+
+    ngOnDestroy(): void {
+        
     }
 }
