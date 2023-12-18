@@ -3,6 +3,9 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthResponseData, AuthService } from "./auth.service";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import * as fromApp from "../store/app.reducer";
+import * as AuthAction from "./store/auth.action";
 
 @Component({
     selector: 'app-auth',
@@ -19,7 +22,10 @@ export class AuthComponent implements OnInit{
         this.isLoginMode = !this.isLoginMode
     }
 
-    constructor(private authService: AuthService, private router: Router){}
+    constructor(
+        private authService: AuthService, 
+        private router: Router,
+        private store: Store<fromApp.AppState>){}
 
     onSubmit(){
 
@@ -32,8 +38,8 @@ export class AuthComponent implements OnInit{
             this.isLoading = true;
 
             if(this.isLoginMode){
-                authObs = this.authService.login(email,password)
-                
+                // authObs = this.authService.login(email,password)
+                this.store.dispatch(new AuthAction.LoginStart({email: email, password: password}))                
             } else {
                 authObs = this.authService.signUp(email, password)
             }
