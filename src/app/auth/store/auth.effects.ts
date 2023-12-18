@@ -40,8 +40,23 @@ export class AuthEffects{
                             expirationDate: expirationDate
                         })
                 }),
-                catchError(error => {
-                return of();
+                catchError(errorRes => {
+                    let errorMessage = 'An Unknown Error Occured';
+                    if (!errorRes.error || !errorRes.error.error){
+                        return of(new AuthAction.LoginFail(errorMessage));
+                    }
+                    switch(errorRes.error.error.message){
+                        case 'EMAIL_EXISTS':
+                            errorMessage = 'This Email already exist.';
+                            break;
+                        case 'EMAIL_NOT_FOUND':
+                            errorMessage = 'This Email does not exist.';
+                            break;
+                        case 'INVALID_LOGIN_CREDENTIALS':
+                            errorMessage = 'Login Credentials Invalid.';
+                            break;
+                    }
+                return of(new AuthAction.LoginFail(errorMessage));
             })
             )
             }))

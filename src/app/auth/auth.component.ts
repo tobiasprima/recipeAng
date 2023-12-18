@@ -66,9 +66,14 @@ export class AuthComponent implements OnInit, OnDestroy{
             'email' : new FormControl(null, [Validators.required, Validators.email]),
             'password' : new FormControl(null, [Validators.required, Validators.minLength(6)])
         })
-        this.store.select('auth').subscribe(authState=> {
-            this.isLoading = authState.loading;
-            this.error = authState.authError;
+        this.store.select('auth').subscribe({
+            next:
+            authState => {
+                this.isLoading = authState.loading;
+            },
+            error: errorMessage => {
+                this.error = errorMessage;
+            }
         })
     }
     

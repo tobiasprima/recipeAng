@@ -12,6 +12,7 @@ export class AddIngredient implements Action{
     readonly type = ADD_INGREDIENT;
     constructor(public payload?: Ingredient | Action){}
 }
+
 export class AddIngredients implements Action{
     readonly type = ADD_INGREDIENTS;
     constructor(public payload?: Ingredient[] | Action){}
