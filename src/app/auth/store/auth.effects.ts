@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Injectable, Type, signal } from "@angular/core";
 import { Router } from "@angular/router";
+import { User } from "../user.model";
 
 export interface AuthResponseData {
     idToken: string,
@@ -19,6 +20,8 @@ const handleAuthentication = (expiresIn: number, email: string, userId: string, 
     const expirationDate = new Date(
         new Date().getTime() + expiresIn * 1000
     )
+    const user = new User(email, userId, token, expirationDate);
+    localStorage.setItem('userData', JSON.stringify(user));
     return new AuthAction.AuthenticateSuccess({
             email: email,
             userId: userId,
@@ -103,10 +106,59 @@ export class AuthEffects{
             }))
     )
 
+    autoLogin$ = createEffect(()=> 
+        this.actions$.pipe(
+            ofType(AuthAction.AUTO_LOGIN),
+            map(()=> {   
+                const userDataString = localStorage.getItem('userData') as string;
+                const userData: {
+                    email: string;
+                    id: string;
+                    _token: string;
+                    _tokenExpirationDate: string;
+                } = JSON.parse(userDataString);
+                if(!userData){
+                    return { type : 'DUMMY'};
+                }
+                const loadedUser = new User(
+                    userData.email,
+                    userData.id,
+                    userData._token,
+                    new Date(userData._tokenExpirationDate)
+                );
+
+                if(loadedUser.token){
+                    return new AuthAction.AuthenticateSuccess(
+                            {
+                                email: loadedUser.email,
+                                userId: loadedUser.id,
+                                token: loadedUser.token,
+                                expirationDate: new Date(userData._tokenExpirationDate)
+                            }
+                        )
+                    // const expirationDuration =
+                    // new Date(userData._tokenExpirationDate).getTime() -
+                    // new Date().getTime();
+                    // this.autoLogout(expirationDuration);
+                }
+                return { type : 'DUMMY'};
+            })
+        )
+    )
+
+    authLogout$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(AuthAction.LOGOUT),
+            tap(()=> {
+                localStorage.removeItem('userData');
+            })),{dispatch: false}
+    )
+
     authRedirect$ = createEffect(()=>
     this.actions$.pipe(
         ofType(
-            AuthAction.AUTHENTICATE_SUCCESS
+            AuthAction.AUTHENTICATE_SUCCESS,
+            AuthAction.LOGOUT
         ), tap(()=> {
             this.router.navigate(['/']);
         })), {dispatch: false}

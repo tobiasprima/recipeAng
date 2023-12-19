@@ -25,8 +25,8 @@ export class AuthComponent implements OnInit, OnDestroy{
     }
 
     constructor(
-        private authService: AuthService, 
-        private router: Router,
+        // private authService: AuthService, 
+        // private router: Router,
         private store: Store<fromApp.AppState>){}
 
     onSubmit(){
