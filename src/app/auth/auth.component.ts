@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthResponseData, AuthService } from "./auth.service";
-import { Observable, Subscription } from "rxjs";
-import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
 import * as fromApp from "../store/app.reducer";
 import * as AuthAction from "./store/auth.action";
@@ -36,7 +34,7 @@ export class AuthComponent implements OnInit, OnDestroy{
         }
             const email = this.authForm.value['email'];
             const password = this.authForm.value['password'];
-            let authObs!: Observable<AuthResponseData>;
+            // let authObs!: Observable<AuthResponseData>;
             this.isLoading = true;
 
             if(this.isLoginMode){
