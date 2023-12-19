@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreDevtoolsModule  } from '@ngrx/store-devtools'
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CoreModule } from './core.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducer';
@@ -31,7 +32,8 @@ import { environment } from '../environments/environment';
     CoreModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
-    StoreDevtoolsModule.instrument({ logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot()
   ],
   
   bootstrap: [AppComponent]
