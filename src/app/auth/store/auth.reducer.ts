@@ -1,3 +1,4 @@
+import { from } from "rxjs";
 import { User } from "../user.model";
 import * as fromAuthAction from "./auth.action";
 
@@ -31,6 +32,7 @@ export function authReducer(state: AuthState = initialState, action : fromAuthAc
             return {
                 ...state,
                 user: null,
+                loading: false,
             }
         case fromAuthAction.LOGIN_START:
         case fromAuthAction.SIGNUP_START:
