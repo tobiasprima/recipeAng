@@ -3,7 +3,9 @@ import * as RecipesActions from "./recipe.action";
 import { map, switchMap } from "rxjs";
 import { Recipe } from "../recipe.model";
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class RecipeEffects{
     fetchRecipes$ = createEffect(()=>
         this.actions$.pipe(
