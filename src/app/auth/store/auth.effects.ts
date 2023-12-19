@@ -103,7 +103,7 @@ export class AuthEffects{
             }))
     )
 
-    authSuccess$ = createEffect(()=>
+    authRedirect$ = createEffect(()=>
     this.actions$.pipe(
         ofType(
             AuthAction.AUTHENTICATE_SUCCESS

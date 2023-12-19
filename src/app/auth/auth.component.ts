@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthResponseData, AuthService } from "./auth.service";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import * as fromApp from "../store/app.reducer";
@@ -17,6 +17,8 @@ export class AuthComponent implements OnInit, OnDestroy{
     authForm!: FormGroup;
     isLoading = false;
     error: string | null = '';
+
+    private storeSub?: Subscription;
 
     onSwitchMode(){
         this.isLoginMode = !this.isLoginMode
@@ -67,7 +69,7 @@ export class AuthComponent implements OnInit, OnDestroy{
             'email' : new FormControl(null, [Validators.required, Validators.email]),
             'password' : new FormControl(null, [Validators.required, Validators.minLength(6)])
         })
-        this.store.select('auth').subscribe({
+        this.storeSub = this.store.select('auth').subscribe({
             next:
             authState => {
                 this.isLoading = authState.loading;
@@ -81,10 +83,12 @@ export class AuthComponent implements OnInit, OnDestroy{
     }
     
     onCloseBox(){
-        this.error = null;
+        this.store.dispatch(new AuthAction.ClearError());
     }
 
-    ngOnDestroy(): void {
-        
+    ngOnDestroy() {
+        if(this.storeSub){
+            this.storeSub.unsubscribe()
+        }
     }
 }
