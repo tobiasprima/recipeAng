@@ -5,9 +5,9 @@ import { Recipe } from "./recipe.model";
 import { RecipeService } from "./recipe.service";
 import { Store } from "@ngrx/store";
 import * as fromApp from "../store/app.reducer";
-import *as RecipeActions from "./store/recipe.action";
+import * as RecipeActions from "./store/recipe.action";
 import { Actions, ofType } from "@ngrx/effects";
-import { take } from "rxjs";
+import { map, switchMap, take } from "rxjs";
 
 @Injectable({providedIn: "root"})
 export class RecipeResolverService   {
@@ -18,11 +18,22 @@ export class RecipeResolverService   {
         private actions$: Actions
         ){}
 
-    resolve: ResolveFn<Recipe[]> = () => {
-        const recipes = this.recipeService.getRecipe();
-            // return this.dataStorageService.fetchRecipes();
-            this.store.dispatch(new RecipeActions.FetchRecipes());
-            return this.actions$.pipe(ofType(RecipeActions.SET_RECIPES), take(1))
-      
+    resolve: any | ResolveFn<Recipe[]> = () => {
+        // const recipes = this.recipeService.getRecipe();
+        // return this.dataStorageService.fetchRecipes();
+        return this.store.select('recipes').pipe(
+            take(1),
+            map(recipeState => {
+                return recipeState.recipes;
+            }),
+            switchMap(recipes => {
+                if(recipes.length ===0){
+                    this.store.dispatch(new RecipeActions.FetchRecipes());
+                    return this.actions$.pipe(ofType(RecipeActions.SET_RECIPES), take(1))
+                } else {
+                    return recipes
+                }
+            })
+        )
       };    
     }
