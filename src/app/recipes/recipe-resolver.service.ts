@@ -20,12 +20,9 @@ export class RecipeResolverService   {
 
     resolve: ResolveFn<Recipe[]> = () => {
         const recipes = this.recipeService.getRecipe();
-        if(recipes.length === 0){
             // return this.dataStorageService.fetchRecipes();
             this.store.dispatch(new RecipeActions.FetchRecipes());
             return this.actions$.pipe(ofType(RecipeActions.SET_RECIPES), take(1))
-        } else {
-            return recipes;
-        }
+      
       };    
     }
