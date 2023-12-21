@@ -18,8 +18,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private userSub!: Subscription;
 
     constructor(
-        private dataStorage: DataStorageService, 
-        private authService: AuthService,
+        // private dataStorage: DataStorageService, 
+        // private authService: AuthService,
         private store: Store<fromApp.AppState>){}
 
     ngOnInit(): void {
@@ -34,7 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     onSaveData(){
-        this.dataStorage.storeRecipes();
+        // this.dataStorage.storeRecipes();
+        this.store.dispatch(new RecipesActions.StoreRecipe())
     }
 
     onFetchData(){
