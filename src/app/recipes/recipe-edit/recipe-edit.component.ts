@@ -75,7 +75,9 @@ export class RecipeEditComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
+    if(this.storeSub){
       this.storeSub.unsubscribe();
+    }
   }
 
   private initForm(){
